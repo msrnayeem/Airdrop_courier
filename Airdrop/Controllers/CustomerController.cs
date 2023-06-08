@@ -43,5 +43,30 @@ namespace Airdrop.Controllers
             }
             return View(data);
         }
+        public ActionResult GetTrackingDetails(string tno)
+        {
+            var data = TrackingService.GetTrackingByTID(tno);
+
+            var details = ShipmentService.GetShipment(data.ShipmnetId);
+
+            var customer = CustomerService.GetCustomer(details.CustomerId);
+
+            // Format the date values
+            ViewBag.Customername = customer.Name;
+            ViewBag.CustomerAddress = customer.Address;
+            ViewBag.CustomerPhone = customer.Phone;
+            ViewBag.TrackingId = data.TrackingId;
+            ViewBag.bookingDate = data.BookingDate.ToString("dd/MM/yyyy");
+            ViewBag.deliveryDate = data.DeliveryDate.ToString("dd/MM/yyyy");
+            ViewBag.TrackingId = data.TrackingId;
+            ViewBag.ReceiverName = details.ReceiverName;
+            ViewBag.ReceiverPhone = details.ReceiverPhone;
+            ViewBag.ReceiverArea = details.ReceiverArea;
+            ViewBag.Payment = details.Payment;
+            ViewBag.Status = data.Status;
+
+
+            return View();
+        }
     }
 }

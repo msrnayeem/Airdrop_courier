@@ -197,6 +197,7 @@
     <Content Include="Views\Admin\AdminProfile.cshtml" />
     <Content Include="Views\Customer\CustomerProfile.cshtml" />
     <Content Include="Views\Shipment\GetTrackingDetails.cshtml" />
+    <Content Include="Views\Customer\GetTrackingDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

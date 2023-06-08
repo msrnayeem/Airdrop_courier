@@ -60,6 +60,7 @@
                         responseHtml += '<p><strong>Placed at:</strong> ' + response.BookingDate + '</p>';
                         responseHtml += '<p><strong>Approx. Delivery Date:</strong> ' + response.DeliveryDate + '</p>';
                         responseHtml += '<p><strong>Status:</strong> ' + response.Status + '</p>';
+                        responseHtml += '<p><a href="/customer/GetTrackingDetails?tno=' + response.TrackingId + '">Details</a></p>';
                         responseHtml += '</div>';
                         $('#responseDiv').html(responseHtml);
                     }
