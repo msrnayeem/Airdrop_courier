@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "AddShipment";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["msg"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form action="/Shipment/AddShipment" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Sender Information</h4>
+                        <div class="form-group">
+                            <label for="senderName">Sender Name:</label>
+                            <input type="text" id="senderName" name="senderName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senderAddress">Sender Address:</label>
+                            <input type="text" id="senderAddress" name="senderAddress" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="senderPhone">Sender phone:</label>
+                            <input type="text" id="senderPhone" name="senderPhone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment">Payment:</label>
+                            <select id="payment" name="payment" class="form-control" required>
+                                <option value="paid">Paid</option>
+                                <option value="due">Not Paid</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Receiver Information</h4>
+                        <div class="form-group">
+                            <label for="receiverName">Receiver Name:</label>
+                            <input type="text" id="receiverName" name="receiverName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverAddress">Receiver Address:</label>
+                            <input type="text" id="receiverAddress" name="receiverAddress" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="receiverPhone">Receiver Phone:</label>
+                            <input type="text" id="receiverPhone" name="receiverPhone" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Add Shipment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

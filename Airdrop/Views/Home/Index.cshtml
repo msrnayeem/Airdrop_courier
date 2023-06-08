@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Welcome to Our Courier Service</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id arcu vitae magna interdum dictum.</p>
+            <p>Our courier service offers fast and reliable delivery to destinations around the world. With our extensive network and efficient logistics, we ensure your packages reach their destination on time.</p>
+        </div>
+        <div class="col-md-6">
+            <h3>Track Your Shipment</h3>
+            <form id="trackingForm">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter tracking number" name="trackingNumber" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" id="trackButton">Track</button>
+                    </div>
+                </div>
+            </form>
+            <div id="responseDiv"></div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#trackButton').click(function () {
+            var trackingNumber = $('input[name="trackingNumber"]').val();
+
+            // Display loading indicator
+            Swal.fire({
+                title: 'Searching',
+                text: 'Please wait...',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                onBeforeOpen: function () {
+                    Swal.showLoading();
+                }
+            });
+
+            // Make an AJAX request to the server
+            $.ajax({
+                url: '/shipment/Trackingg',
+                type: 'GET',
+                data: { tno: trackingNumber },
+                success: function (response) {
+                    console.log(response);
+                    // Check if the response is null or contains the tracking information
+                    if (response === null) {
+                        // Display a message indicating that the tracking information was not found
+                        Swal.fire('Tracking Information', 'Tracking information not found.', 'error');
+                        $('#responseDiv').html('<div class="alert alert-danger">Tracking information not found.</div>');
+                    } else {
+                        // Update the content of the responseDiv with the received data
+                        var responseHtml = '<div class="alert alert-success">';
+                        responseHtml += '<p><strong>Tracking Id:</strong> ' + response.TrackingId + '</p>';
+                        responseHtml += '<p><strong>Placed at:</strong> ' + response.BookingDate + '</p>';
+                        responseHtml += '<p><strong>Approx. Delivery Date:</strong> ' + response.DeliveryDate + '</p>';
+                        responseHtml += '<p><strong>Status:</strong> ' + response.Status + '</p>';
+                        responseHtml += '</div>';
+                        $('#responseDiv').html(responseHtml);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Handle any error that occurs during the AJAX request
+                    
+                    // Display an error message using SweetAlert
+                    Swal.fire('Error', 'An error occurred while retrieving tracking information.', 'error');
+                    $('#responseDiv').html('<div class="alert alert-danger">Tracking information not found.</div>');
+                },
+                complete: function () {
+                    // Close the loading indicator
+
+                    Swal.close();
+                }
+            });
+        });
+    });
+</script>
+

@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Tracking";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["msg"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+<table id="trackingTable" class="table table-bordered table-hover">
+    <thead class="table-warning">
+        <tr>
+            <th>Shipment Id</th>
+            <th>Tracking Id</th>
+            <th>Booking Date</th>
+            <th>Delivery Date</th>
+            <th>Status </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null)
+        {
+            <tr><td colspan="5">No Data Found</td></tr>
+        }
+        else
+        {
+            foreach (var tracking in Model)
+            {
+                <tr>
+                    <td>@tracking.ShipmnetId</td>
+                    <td>@tracking.TrackingId</td>
+                    <td>@tracking.BookingDate</td>
+                    <td>@tracking.DeliveryDate.ToString("yyyy-MM-dd")</td>
+                    <td>@tracking.Status</td>
+                    <td> 
+                        <button class="btn btn-primary edit-button" data-id="@tracking.Id">Edit</button>
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>
+
+
+<script>
+    $(document).ready(function () {
+        $('#trackingTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    className: 'btn btn-primary',
+                    text: '<i class="fas fa-file-csv"></i> CSV'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-success',
+                    text: '<i class="fas fa-file-excel"></i> Excel'
+                },
+                {
+                    extend: 'pdf',
+                    className: 'btn btn-danger',
+                    text: '<i class="fas fa-file-pdf"></i> PDF'
+                }
+            ],
+            paging: true, // Enable pagination
+            searching: true, // Enable search
+            searchCols: [
+                null, null, null, null, null, null // Set searchCols value to -1 for each column
+            ],
+        });
+
+    });
+
+    $(document).ready(function () {
+        // Edit button click event
+        $('.edit-button').click(function () {
+            var trackingId = $(this).data('id');
+            console.log(trackingId);
+            // Create a SweetAlert popup with form inputs
+            Swal.fire({
+                title: 'Update Status',
+                html:
+                    '<input id="deliveryDateInput" class="swal2-input" type="date">' +
+                    '<select id="statusSelect" class="swal2-input">' +
+                    '   <option value="Pending action">Pending action</option>' +
+                    '   <option value="In shipment">In shipment</option>' +
+                    '   <option value="In destination">In destination</option>' +
+                    '   <option value="Delivered">Delivered</option>' +
+                    '</select>',
+                focusConfirm: false,
+                preConfirm: function () {
+                    return new Promise(function (resolve) {
+                        var deliveryDate = $('#deliveryDateInput').val();
+                        var status = $('#statusSelect').val();
+                        if (deliveryDate == '') {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Please enter delivery date',
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    resolve();
+                                }
+                            });
+                            
+                        }
+                        else {
+                            $.ajax({
+                                url: '/shipment/UpdateTracking',  // Replace with the actual endpoint URL
+                                type: 'POST',
+                                data: {
+                                    trackId: trackingId,
+                                    deliveryDate: deliveryDate,
+                                    status: status
+                                },
+                                success: function (response) {
+                                    //check and fire alert
+                                    if (response.success) {
+                                        Swal.fire({
+                                            title: 'Success!',
+                                            text: response.message,
+                                            icon: 'success',
+                                            confirmButtonText: 'OK'
+                                        }).then((result) => {
+                                            if (result.isConfirmed) {
+                                                location.reload();
+                                            }
+                                        });
+                                    }
+                                    else {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: response.message,
+                                            icon: 'error',
+                                            confirmButtonText: 'OK'
+                                        });
+                                    }
+                                },
+                                error: function (error) {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: error.message,
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                            });
+                        }
+                        
+                        
+                        
+                    });
+                }
+            });
+        });
+    });
+
+</script>
+

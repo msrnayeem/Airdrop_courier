@@ -1,0 +1,14 @@
+D:\Airdrop\BLL\bin\Debug\BLL.dll
+D:\Airdrop\BLL\bin\Debug\BLL.pdb
+D:\Airdrop\BLL\bin\Debug\DA.dll
+D:\Airdrop\BLL\bin\Debug\EntityFramework.dll
+D:\Airdrop\BLL\bin\Debug\DA.pdb
+D:\Airdrop\BLL\bin\Debug\DA.dll.config
+D:\Airdrop\BLL\bin\Debug\EntityFramework.xml
+D:\Airdrop\BLL\obj\Debug\BLL.csproj.AssemblyReference.cache
+D:\Airdrop\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+D:\Airdrop\BLL\obj\Debug\BLL.csproj.CopyComplete
+D:\Airdrop\BLL\obj\Debug\BLL.dll
+D:\Airdrop\BLL\obj\Debug\BLL.pdb
+D:\Airdrop\BLL\bin\Debug\AutoMapper.dll
+D:\Airdrop\BLL\bin\Debug\AutoMapper.xml

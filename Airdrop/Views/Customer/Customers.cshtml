@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+@if(TempData["msg"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>@TempData["msg"]</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+<table id="customerTable" class="table table-bordered table-hover">
+    <thead class="table-warning">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null)
+        {
+            <tr><td colspan="5">No Data Found</td></tr>
+        }
+        else
+        {
+            foreach (var customer in Model)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Address</td>
+                    <td>@customer.Phone</td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Customer", new { id = customer.Id })" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                        </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('#customerTable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    className: 'btn btn-primary',
+                    text: '<i class="fas fa-file-csv"></i> CSV'
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-success',
+                    text: '<i class="fas fa-file-excel"></i> Excel'
+                },
+                {
+                    extend: 'pdf',
+                    className: 'btn btn-danger',
+                    text: '<i class="fas fa-file-pdf"></i> PDF'
+                }
+            ],
+            paging: true, // Enable pagination
+            searching: true, // Enable search
+            searchCols: [
+                null, null, null, null // Set searchCols value to -1 for each column
+            ],
+        });
+    });
+</script>
+
+

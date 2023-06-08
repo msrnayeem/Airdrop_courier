@@ -1,0 +1,17 @@
+D:\Airdrop\DA\bin\Debug\DA.dll.config
+D:\Airdrop\DA\bin\Debug\DA.dll
+D:\Airdrop\DA\bin\Debug\DA.pdb
+D:\Airdrop\DA\bin\Debug\EntityFramework.dll
+D:\Airdrop\DA\bin\Debug\EntityFramework.SqlServer.dll
+D:\Airdrop\DA\bin\Debug\EntityFramework.xml
+D:\Airdrop\DA\bin\Debug\EntityFramework.SqlServer.xml
+D:\Airdrop\DA\obj\Debug\DA.csproj.AssemblyReference.cache
+D:\Airdrop\DA\obj\Debug\DA.csproj.CoreCompileInputs.cache
+D:\Airdrop\DA\obj\Debug\DA.csproj.CopyComplete
+D:\Airdrop\DA\obj\Debug\DA.dll
+D:\Airdrop\DA\obj\Debug\DA.pdb
+D:\Airdrop\DA\obj\Debug\DA.Migrations.DivisionTable.resources
+D:\Airdrop\DA\obj\Debug\DA.csproj.GenerateResource.cache
+D:\Airdrop\DA\obj\Debug\DA.Migrations.DivisionDistrict.resources
+D:\Airdrop\DA\obj\Debug\DA.Migrations.AdminCustomerTable.resources
+D:\Airdrop\DA\obj\Debug\DA.Migrations.ShipmnetTrackingTable.resources
