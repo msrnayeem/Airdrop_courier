@@ -16,7 +16,6 @@
     <thead class="table-warning">
         <tr>
             <th>Name</th>
-            <th>Address</th>
             <th>Phone</th>
             <th>Action</th>
         </tr>
@@ -30,14 +29,14 @@
         {
             foreach (var customer in Model)
             {
-                <tr>
-                    <td>@customer.Name</td>
-                    <td>@customer.Address</td>
-                    <td>@customer.Phone</td>
-                    <td>
-                        <button class="btn btn-primary btn-sm" onclick="openEditForm('@customer.Id', '@customer.Name', '@customer.Address', '@customer.Phone')"><i class="fas fa-edit"></i> Edit</button>
-                    </td>
-                </tr>
+    <tr>
+        <td><a href="/customer/CustomerProfile?id=@customer.Id">@customer.Name</a></td>
+        <td>@customer.Address</td>
+    
+        <td>
+            <button class="btn btn-primary btn-sm" onclick="openEditForm('@customer.Id', '@customer.Name', '@customer.Address', '@customer.Phone')"><i class="fas fa-edit"></i> Edit</button>
+        </td>
+    </tr>
             }
         }
     </tbody>

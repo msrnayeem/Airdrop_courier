@@ -32,5 +32,16 @@ namespace Airdrop.Controllers
             //return json response
             return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult CustomerProfile(int id)
+        {
+            var data = CustomerService.GetCustomer(id);
+            if (data == null)
+            {
+                TempData["msg"] = "Customer information not found";
+                return RedirectToAction("Customers");
+            }
+            return View(data);
+        }
     }
 }

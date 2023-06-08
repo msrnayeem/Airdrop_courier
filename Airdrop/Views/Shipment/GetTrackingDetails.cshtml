@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "GetTrackingDetails";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Sender Details</h5>
+                    <p class="card-text">Sender Name: @ViewBag.SenderName</p>
+                    <p class="card-text">Sender Phone: @ViewBag.SenderPhone</p>
+                    <p class="card-text">Sender Address: @ViewBag.SenderAddress</p>
+                    <!-- Add more properties as needed -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Receiver Details</h5>
+                    <p class="card-text">Receiver Name: @ViewBag.ReceiverName</p>
+                    <p class="card-text">Receiver Phone: @ViewBag.ReceiverPhone</p>
+                    <p class="card-text">Receiver Address: @ViewBag.ReceiverAddress</p>
+                    <!-- Add more properties as needed -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -135,7 +135,27 @@ namespace Airdrop.Controllers
             // Return the JSON response with the formatted data
             return Json(formattedData, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetTrackingDetails(string tno)
+        {
+            var data = TrackingService.GetTrackingByTID(tno);
+            
+            var details = ShipmentService.GetShipment(data.ShipmnetId);
+            // Format the date values
+            ViewBag.bookingDate = data.BookingDate.ToString("dd/MM/yyyy");
+            ViewBag.deliveryDate = data.DeliveryDate.ToString("dd/MM/yyyy");
 
+
+
+            ViewBag.TrackingId = data.TrackingId;
+            ViewBag.ReceiverName = details.ReceiverName;
+            ViewBag.ReceiverPhone = details.ReceiverPhone;
+            ViewBag.ReceiverArea = details.ReceiverArea;
+            ViewBag.Payment = details.Payment;
+            ViewBag.Status = data.Status;
+            
+            
+            return View();
+        }
 
     }
 }

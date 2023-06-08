@@ -36,11 +36,11 @@
             {
     <tr>
         <td>@shipment.Id</td>
-        <td>@shipment.CustomerName</td>
+        <td><a href="/customer/CustomerProfile?id=@shipment.CustomerId">@shipment.CustomerName</a></td>
         <td>@shipment.ReceiverName</td>
         <td>@shipment.CustomerAddress</td>
         <td>@shipment.ReceiverPhone</td>
-        <td>@shipment.TrackingId</td>
+        <td><a href="/Shipment/GetTrackingDetails?tno=@shipment.TrackingId">@shipment.TrackingId</a></td>
         <td>@shipment.Payment</td>
     </tr>
 

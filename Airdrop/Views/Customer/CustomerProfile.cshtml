@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "CustomerProfile";
+    Layout = "~/Views/Shared/adminLayout.cshtml";
+}
+
+<div class="container">
+    <div class="card">
+        <div class="card-body text-center">
+            <h5 class="card-title">Customer Profile</h5>
+            <p class="card-text">Name: @Model.Name</p>
+            <p class="card-text">Email: @Model.Address</p>
+            <p class="card-text">Phone: @Model.Phone</p>
+        </div>
+    </div>
+</div>
+
