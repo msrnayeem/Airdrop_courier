@@ -47,7 +47,6 @@
     <Compile Include="Class1.cs" />
     <Compile Include="DTO\AdminDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
-    <Compile Include="DTO\MappingProfile.cs" />
     <Compile Include="DTO\ShipmentCustomerDTO.cs" />
     <Compile Include="DTO\ShipmentDTO.cs" />
     <Compile Include="DTO\TrackingDTO.cs" />

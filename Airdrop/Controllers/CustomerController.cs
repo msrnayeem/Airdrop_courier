@@ -1,4 +1,5 @@
-﻿using BLL.Services;
+﻿using BLL.DTO;
+using BLL.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,14 @@ namespace Airdrop.Controllers
             TempData["msg"] = "Customer deleted successfully";
 
             return RedirectToAction("Customers");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCustomer(CustomerDTO customer)
+        {
+            var data = CustomerService.UpdateCustomer(customer);
+            //return json response
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
     }
 }

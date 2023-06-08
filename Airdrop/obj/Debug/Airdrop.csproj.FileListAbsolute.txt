@@ -86,5 +86,3 @@ D:\Airdrop\Airdrop\obj\Debug\Airdrop.csproj.CoreCompileInputs.cache
 D:\Airdrop\Airdrop\obj\Debug\Airdrop.csproj.CopyComplete
 D:\Airdrop\Airdrop\obj\Debug\Airdrop.dll
 D:\Airdrop\Airdrop\obj\Debug\Airdrop.pdb
-D:\Airdrop\Airdrop\bin\AutoMapper.dll
-D:\Airdrop\Airdrop\bin\AutoMapper.xml

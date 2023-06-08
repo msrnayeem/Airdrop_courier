@@ -3,7 +3,7 @@
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/adminLayout.cshtml";
 }
-@if(TempData["msg"] != null)
+@if (TempData["msg"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>@TempData["msg"]</strong>
@@ -35,8 +35,8 @@
                     <td>@customer.Address</td>
                     <td>@customer.Phone</td>
                     <td>
-                        <a href="@Url.Action("Edit", "Customer", new { id = customer.Id })" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                        </td>
+                        <button class="btn btn-primary btn-sm" onclick="openEditForm('@customer.Id', '@customer.Name', '@customer.Address', '@customer.Phone')"><i class="fas fa-edit"></i> Edit</button>
+                    </td>
                 </tr>
             }
         }
@@ -71,6 +71,69 @@
             ],
         });
     });
+
+    function openEditForm(customerId, customerName, Address, Phone) {
+
+            Swal.fire({
+                title: 'Edit Customer',
+                html: `<input type="text" id="customerName" placeholder="Name" class="swal2-input" value="${customerName}">` +
+                    `<input type="text" id="customerAddress" placeholder="Address" class="swal2-input" value="${Address}">` +
+                    `<input type="text" id="customerPhone" placeholder="Phone" class="swal2-input" value="${Phone}">`,
+                showCancelButton: true,
+                confirmButtonText: 'Save',
+                cancelButtonText: 'Cancel',
+                preConfirm: () => {
+                    const name = Swal.getPopup().querySelector('#customerName').value;
+                    const address = Swal.getPopup().querySelector('#customerAddress').value;
+                    const phone = Swal.getPopup().querySelector('#customerPhone').value;
+                    //phone number will start with 01 and will be 11 digits long
+
+                    
+                    // Validate input fields
+                    if (!name || !address || !phone) {
+                        Swal.showValidationMessage('Please fill in all fields');
+                        return false;
+                    }
+                    const phoneRegex = /^01\d{9}$/;
+                    if (!phoneRegex.test(phone)) {
+                        Swal.showValidationMessage('valid phone number start with 01 and 11 digit');
+                        return false;
+                    }
+
+                    const data = {
+                        Id: customerId,
+                        Name: name,
+                        Address: address,
+                        Phone: phone
+                    };
+                    return fetch('/Customer/UpdateCustomer', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result) {
+                                Swal.fire('Success', 'Customer updated successfully!', 'success');
+                                // Perform any additional actions on success
+                                //resolve and reload page
+                                location.reload();
+
+                            } else {
+                                Swal.fire('Error', 'Failed to update customer.', 'error');
+                                // Perform any additional actions on error
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire('Error', 'An error occurred.', 'error');
+                            console.error(error);
+                        });
+                }
+            });
+  }
 </script>
+
 
 
