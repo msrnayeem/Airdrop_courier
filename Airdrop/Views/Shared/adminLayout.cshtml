@@ -65,14 +65,15 @@
                     <a class="nav-link" href="/admin/AdminProfile">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/home/logout">Logout</a>
+                    <p class="nav-link" onclick="handleLogout()" style="cursor: pointer;">Logout</p>
+
                 </li>
             </ul>
         </div>
     </nav>
 
 
-    <div style="margin-top: 60px;">
+    <div style="margin-top: 80px;">
         @RenderBody()
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -82,6 +83,51 @@
                 return this.href == location.href;
             }).parent().addClass('active');
         });
+
+
+       
+    // Function to handle the logout click event
+            function handleLogout() {
+                // Display SweetAlert confirmation box
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // User confirmed, send AJAX request
+                        sendLogoutRequest();
+                    }
+                })};
+    
+
+            // Function to send the AJAX request
+            function sendLogoutRequest() {
+                // Make your AJAX request here using the appropriate method (e.g., jQuery's $.ajax or Fetch API)
+                // Replace the URL with your logout endpoint
+                // Replace the success condition with your actual success response
+                // On successful response, redirect to home/index
+                $.ajax({
+                    url: '/home/logout',
+                    method: 'POST',
+                    success: function (response) {
+                        if (response.success === true) {
+                            // Redirect to home/index
+                            window.location.href = '/home/index';
+                        } else {
+                            // Handle any other response condition
+                            console.log('Logout failed');
+                        }
+                    },
+                    error: function () {
+                        // Handle AJAX request error
+                        console.log('Logout failed');
+                    }
+                })};
+    
+
     </script>
 
 </body>

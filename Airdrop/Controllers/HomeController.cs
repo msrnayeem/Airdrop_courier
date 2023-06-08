@@ -58,7 +58,7 @@ namespace Airdrop.Controllers
         public ActionResult Logout()
         {
             Session["Id"] = null;
-            return RedirectToAction("Login");
+            return Json(new { success = true });
         }
     }
 }
