@@ -33,16 +33,16 @@
         {
             foreach (var tracking in Model)
             {
-                <tr>
-                    <td>@tracking.ShipmnetId</td>
-                    <td>@tracking.TrackingId</td>
-                    <td>@tracking.BookingDate</td>
-                    <td>@tracking.DeliveryDate.ToString("yyyy-MM-dd")</td>
-                    <td>@tracking.Status</td>
-                    <td> 
-                        <button class="btn btn-primary edit-button" data-id="@tracking.Id">Edit</button>
-                    </td>
-                </tr>
+    <tr>
+        <td>@tracking.ShipmnetId</td>
+        <td><a href="/Shipment/GetTrackingDetails?tno=@tracking.TrackingId">@tracking.TrackingId</a></td>
+        <td>@tracking.BookingDate</td>
+        <td>@tracking.DeliveryDate.ToString("yyyy-MM-dd")</td>
+        <td>@tracking.Status</td>
+        <td>
+            <button class="btn btn-primary edit-button" data-id="@tracking.Id">Edit</button>
+        </td>
+    </tr>
 
             }
         }

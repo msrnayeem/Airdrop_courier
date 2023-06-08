@@ -4,28 +4,88 @@
 }
 
 <div class="container">
-    <div class="row">
+    <header class="text-center">
+        <h3>Tracking Details - @ViewBag.TrackingId</h3>
+    </header>
+    <div class="row mt-4">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-body text-center">
+                <div class="card-body">
                     <h5 class="card-title">Sender Details</h5>
-                    <p class="card-text">Sender Name: @ViewBag.SenderName</p>
-                    <p class="card-text">Sender Phone: @ViewBag.SenderPhone</p>
-                    <p class="card-text">Sender Address: @ViewBag.SenderAddress</p>
-                    <!-- Add more properties as needed -->
+                    <table class="table">
+                        <tr>
+                            <td>Sender Name:</td>
+                            <td>@ViewBag.CustomerName</td>
+                        </tr>
+                        <tr>
+                            <td>Sender Phone:</td>
+                            <td>@ViewBag.CustomerPhone</td>
+                        </tr>
+                        <tr>
+                            <td>Sender Address:</td>
+                            <td>@ViewBag.CustomerAddress</td>
+                        </tr>
+                        <tr>
+                            <td>Booking Date:</td>
+                            <td>@ViewBag.bookingDate</td>
+                        </tr>
+                        <tr>
+                            <td>Payment:</td>
+                            <td>@ViewBag.bookingDate</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
+
         <div class="col-md-6">
             <div class="card">
-                <div class="card-body text-center">
+                <div class="card-body text-capitalize">
                     <h5 class="card-title">Receiver Details</h5>
-                    <p class="card-text">Receiver Name: @ViewBag.ReceiverName</p>
-                    <p class="card-text">Receiver Phone: @ViewBag.ReceiverPhone</p>
-                    <p class="card-text">Receiver Address: @ViewBag.ReceiverAddress</p>
-                    <!-- Add more properties as needed -->
+                    <table class="table">
+                        <tr>
+                            <td>Receiver Name:</td>
+                            <td>@ViewBag.ReceiverName</td>
+                        </tr>
+                        <tr>
+                            <td>Receiver Phone:</td>
+                            <td>@ViewBag.ReceiverPhone</td>
+                        </tr>
+                        <tr>
+                            <td>Receiver Address:</td>
+                            <td>@ViewBag.ReceiverArea</td>
+                        </tr>
+                        <tr>
+                            <td>Approximate Delivery:</td>
+                            <td>@ViewBag.deliveryDate</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>@ViewBag.status</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+        </div>
+
+        <div class="text-center mt-4 print-hide">
+            <button class="btn btn-primary" onclick="printPage()">Print</button>
         </div>
     </div>
+
 </div>
+
+<script>
+    function printPage() {
+        // Hide the print button before printing
+        var printButton = document.querySelector('.print-hide');
+        printButton.style.display = 'none';
+
+        // Print the page
+        window.print();
+
+        // Restore the print button after printing
+        printButton.style.display = 'block';
+    }
+</script>
+

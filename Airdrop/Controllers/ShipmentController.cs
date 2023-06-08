@@ -36,7 +36,7 @@ namespace Airdrop.Controllers
             var customerId = CustomerService.AddCustomer(customer);
 
             //genearte tracking number using customer id and time format airdrop_1_2021-01-01_12-00-00
-            var trackingNumber = $"airdrop_{customerId}_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}";
+            var trackingNumber = $"airdrop_{customerId}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}";
 
             var shipment = new ShipmentDTO
             {
@@ -124,9 +124,8 @@ namespace Airdrop.Controllers
             // Create an anonymous object with the formatted values
             var formattedData = new
             {
-                
-                TrackingId = data.TrackingId,
-                Status = data.Status,
+                data.TrackingId,
+                data.Status,
                 BookingDate = bookingDate,
                 DeliveryDate = deliveryDate,
                 // Include other properties as needed
@@ -140,12 +139,16 @@ namespace Airdrop.Controllers
             var data = TrackingService.GetTrackingByTID(tno);
             
             var details = ShipmentService.GetShipment(data.ShipmnetId);
+
+            var customer = CustomerService.GetCustomer(details.CustomerId);
+
             // Format the date values
+            ViewBag.Customername = customer.Name;
+            ViewBag.CustomerAddress = customer.Address;
+            ViewBag.CustomerPhone = customer.Phone;
+            ViewBag.TrackingId = data.TrackingId;
             ViewBag.bookingDate = data.BookingDate.ToString("dd/MM/yyyy");
             ViewBag.deliveryDate = data.DeliveryDate.ToString("dd/MM/yyyy");
-
-
-
             ViewBag.TrackingId = data.TrackingId;
             ViewBag.ReceiverName = details.ReceiverName;
             ViewBag.ReceiverPhone = details.ReceiverPhone;
