@@ -19,6 +19,7 @@
                     </div>
                 </div>
             </form>
+
             <div id="responseDiv"></div>
         </div>
     </div>
@@ -67,7 +68,7 @@
                 },
                 error: function (xhr, status, error) {
                     // Handle any error that occurs during the AJAX request
-                    
+
                     // Display an error message using SweetAlert
                     Swal.fire('Error', 'An error occurred while retrieving tracking information.', 'error');
                     $('#responseDiv').html('<div class="alert alert-danger">Tracking information not found.</div>');

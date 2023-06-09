@@ -80,8 +80,6 @@ namespace Airdrop.Controllers
         
         public ActionResult UpdateTracking(int trackId, string deliveryDate, string status)
         {
-            // Convert the string delivery date to DateTime
-            var deliveryDatee = Convert.ToDateTime(deliveryDate);
             try
             {
                 var data = TrackingService.GetTracking(trackId);
@@ -91,20 +89,16 @@ namespace Airdrop.Controllers
                     TrackingId = data.TrackingId,
                     Status = status,
                     BookingDate = data.BookingDate,
-                    DeliveryDate = deliveryDatee,
+                    DeliveryDate = string.IsNullOrEmpty(deliveryDate) ? data.DeliveryDate : Convert.ToDateTime(deliveryDate),
                     ShipmnetId = data.ShipmnetId
                 };
-                var updated = TrackingService.UpdateTracking(ob); // Pass 'ob' instead of 'data'
+                var updated = TrackingService.UpdateTracking(ob);
 
-                // Assuming the update was successful, return a success message
                 return Json(new { success = true, message = "Tracking updated successfully" });
             }
             catch (Exception ex)
             {
-                // Handle any exceptions that occur during the update process
-                // You can log the exception or perform any other necessary actions
 
-                // Return an error message
                 return Json(new { success = false, message = "Failed to update tracking: " + ex.Message });
             }
         }

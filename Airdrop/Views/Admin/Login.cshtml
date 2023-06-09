@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -11,7 +12,7 @@
             {
                 <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
             }
-            <form id="login-form" action="/Home/login" method="POST">
+            <form id="login-form" action="/Admin/login" method="POST">
                 <div class="form-group">
                     <label for="Email">Email</label>
                     <input type="text" class="form-control" id="Email" name="Email" required>
@@ -25,3 +26,4 @@
         </div>
     </div>
 </div>
+
