@@ -1,5 +1,7 @@
 # Airdrop_courier
-used auto migration 
+
+first used add-migration for specific migration later auto-migration
+
 ->login info-
 email: admin@gmail.com
 password: adminn
