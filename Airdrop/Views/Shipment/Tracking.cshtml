@@ -89,13 +89,21 @@
             Swal.fire({
                 title: 'Update Status',
                 html:
-                    '<input id="deliveryDateInput" class="swal2-input" type="date">' +
-                    '<select id="statusSelect" class="swal2-input">' +
-                    '   <option value="Pending action">Pending action</option>' +
-                    '   <option value="In shipment">In shipment</option>' +
-                    '   <option value="In destination">In destination</option>' +
-                    '   <option value="Delivered">Delivered</option>' +
-                    '</select>',
+                    '<div class="row">' +
+                    '   <div class="col">' +
+                    '       <label for="deliveryDateInput">Delivery Date:</label>' +
+                    '       <input id="deliveryDateInput" class="swal2-input" type="date">' +
+                    '   </div>' +
+                    '   <div class="col">' +
+                    '       <label for="statusSelect">Status:</label>' +
+                    '       <select id="statusSelect" class="swal2-input">' +
+                    '           <option value="Pending action">Pending action</option>' +
+                    '           <option value="In shipment">In shipment</option>' +
+                    '           <option value="In destination">In destination</option>' +
+                    '           <option value="Delivered">Delivered</option>' +
+                    '       </select>' +
+                    '   </div>' +
+                    '</div>',
                 focusConfirm: false,
                 preConfirm: function () {
                     return new Promise(function (resolve) {
