@@ -18,8 +18,15 @@ namespace Airdrop.Controllers
 
         public ActionResult Login()
         {
-            ViewBag.Message = "Your contact page.";
+           
+            // Retrieve TempData value set in the Admin action filter
+            string errorMessage = TempData["ErrorMessage"] as string;
 
+            // Check if TempData value exists and handle it accordingly
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ViewBag.ErrorMessage = errorMessage;
+            }
             return View();
         }
         [HttpPost]
@@ -31,7 +38,16 @@ namespace Airdrop.Controllers
             {
                 //set session
                 Session["Id"] = data;
-
+                //check if session has route
+                if (Session["Route"] != null)
+                {
+                    //get route from session
+                    var route = Session["Route"].ToString();
+                    //remove session
+                    Session["Route"] = null;
+                    //redirect to route
+                    return Redirect(route);
+                }
                 return RedirectToAction("Index", "Admin");
             }
             else
@@ -45,6 +61,7 @@ namespace Airdrop.Controllers
         public ActionResult Logout()
         {
             Session["Id"] = null;
+            Session["Route"] = null;
             return Json(new { success = true });
         }
 
@@ -60,7 +77,7 @@ namespace Airdrop.Controllers
             }
             else
             {
-                TempData["ErrorMessage"] = "Invalid Email or Password";
+                TempData["ErrorMessage"] = "Login first";
                 // redirect to home/login
                 return RedirectToAction("Login", "Home");
             }

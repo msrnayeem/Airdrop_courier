@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using Airdrop.ActionFilter;
+using BLL.DTO;
 using BLL.Services;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Airdrop.Controllers
     public class CustomerController : Controller
     {
         // GET: Customer
+        [Admin]
         public ActionResult Customers()
         {
             var data = CustomerService.GetCustomers();
@@ -33,6 +35,7 @@ namespace Airdrop.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        [Admin]
         public ActionResult CustomerProfile(int id)
         {
             var data = CustomerService.GetCustomer(id);

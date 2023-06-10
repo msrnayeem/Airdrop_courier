@@ -1,4 +1,5 @@
-﻿using BLL.DTO;
+﻿using Airdrop.ActionFilter;
+using BLL.DTO;
 using BLL.Services;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Airdrop.Controllers
     public class ShipmentController : Controller
     {
         // GET: Shipment
+        [Admin]
         public ActionResult Shipments()
         {
             var data = ShipmentService.GetShipments();
@@ -68,6 +70,7 @@ namespace Airdrop.Controllers
         }
 
         //Tracking
+        [Admin]
         public ActionResult Tracking()
         {
             // get data from tracking service
@@ -128,6 +131,8 @@ namespace Airdrop.Controllers
             // Return the JSON response with the formatted data
             return Json(formattedData, JsonRequestBehavior.AllowGet);
         }
+
+       
         public ActionResult GetTrackingDetails(string tno)
         {
             var data = TrackingService.GetTrackingByTID(tno);
